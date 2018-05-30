@@ -11,6 +11,9 @@ public class MovementInput : MonoBehaviour {
     // How fast the player should rotate towards the target.
     [SerializeField] float rotationSpeed;
 
+    // How close to the target is acceptable?
+    [SerializeField] float stoppingDistance;
+
     // The layers the raycast will detect?
     [SerializeField] LayerMask acceptableTarget;
 
@@ -21,9 +24,9 @@ public class MovementInput : MonoBehaviour {
     [SerializeField] NavMeshAgent playerAgent;
 
     // The path given from the NavMesh.
-    List<Vector3> path;
+    List<Vector3> path = new List<Vector3>();
 
-    NavMeshPath navMeshPath = new NavMeshPath();
+    MovementPath navMeshPath = new MovementPath();
 
     private void Update()
     {
@@ -32,7 +35,7 @@ public class MovementInput : MonoBehaviour {
             GetTargetPosition(Input.mousePosition);
         }
 
-        if (path != null)
+        if (path.Count > 0)
         {
             UpdateMovement();
         }
@@ -45,26 +48,37 @@ public class MovementInput : MonoBehaviour {
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, acceptableTarget))
         {
+            //Debug.Log(hit.point);
             path = navMeshPath.GetPath(hit.point, playerAgent);
 
             if(path == null)
             {
+                path = new List<Vector3>();
                 return;
-            }
-
-            // Path should be at player height at all time
-            for (int i = 0; i < path.Count; i++)
-            {
-                Vector3 currPos = path[i];
-                currPos.y = 5f;
-                path[i] = currPos;
             }
         }
     }
 
     void UpdateMovement()
     {
-        Vector3 dir = (path[0] - transform.position).normalized;
+        Vector3 playerPos = transform.position;
+        Vector3 targetPos = path[0];
+
+        // Target position should have the same height as player.
+        targetPos.y = playerPos.y;
+        Vector3 dir = (targetPos - playerPos).normalized;
         transform.position += dir * movementSpeed * Time.deltaTime;
+
+        if(Vector3.Distance(targetPos, playerPos) <= stoppingDistance)
+        {
+            if(path.Count > 1)
+            {
+                path.RemoveAt(0);
+            }
+            else
+            {
+                path = new List<Vector3>();
+            }
+        }
     }
 }
