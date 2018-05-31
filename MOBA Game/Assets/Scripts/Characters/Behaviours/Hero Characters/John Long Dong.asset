@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec8573849bfcb84baeee1ab9ae6bc03, type: 3}
+  m_Name: John Long Dong
+  m_EditorClassIdentifier: 
+  characterName: John Long Dong
+  description: This is a Hero
+  image: {fileID: 0}
+  baseDamageRange: {x: 44, y: 50}
+  attackSpeed: 0.72
+  health: 473
+  mana: 221
+  armor: 2.08
+  magicArmor: 5
+  attackRange: 600
+  movementSpeed: 300
+  baseHealthRegeneration: 1.5
+  baseManaRegeneration: 1.5
+  goldGivenUponDeath: 300
+  attackType: 0
+  attackRangeType: 1
+  baseStrength: 17
+  baseAgility: 22
+  baseIntelligence: 17
+  strengthPerLevel: 1.7
+  agilityPerLevel: 2.5
+  intelligencePerLevel: 1.8
