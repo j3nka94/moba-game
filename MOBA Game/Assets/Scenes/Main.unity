@@ -920,6 +920,7 @@ MonoBehaviour:
   currentHealth: 0
   currentMana: 0
   characterStats: {fileID: 11400000, guid: 732479f7889d65d44adc09121edf3209, type: 2}
+  heroStats: {fileID: 11400000, guid: 732479f7889d65d44adc09121edf3209, type: 2}
   currentGold: 0
 --- !u!114 &2056957696
 MonoBehaviour:

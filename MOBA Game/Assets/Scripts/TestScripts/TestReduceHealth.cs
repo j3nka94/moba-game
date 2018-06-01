@@ -14,5 +14,17 @@ public class TestReduceHealth : MonoBehaviour {
             recieving.OnDamageTaken(recieving, giving, CharacterAttackType.PHYSICAL, damageGiven);
             Debug.Log("Character's remaining health = " + recieving.currentHealth);
         }
-	}
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            giving.OnStrengthChange(giving, 5);
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            giving.OnAgilityChange(giving, 5);
+        }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            giving.OnIntelligenceChange(giving, 5);
+        }
+    }
 }

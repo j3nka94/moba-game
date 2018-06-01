@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BaseCharacterStatManagement : MonoBehaviour, IStatManagement<BaseCharacter, BaseCharacterStatManagement> {
+public class BaseCharacterStatManagement : MonoBehaviour, IBaseCharacterStatManagement<BaseCharacter, BaseCharacterStatManagement> {
 
     public float currentHealth;
     public float currentMana;
@@ -89,7 +89,7 @@ public class BaseCharacterStatManagement : MonoBehaviour, IStatManagement<BaseCh
     }
 }
 
-public interface IStatManagement<T, Y> {
+public interface IBaseCharacterStatManagement<T, Y> {
 
     void LoadStats(T stats);
     void OnDamageTaken(Y recievingCharacterStatManagement, BaseCharacterStatManagement attackingCharacterStatManagement, CharacterAttackType attackType, float damage);

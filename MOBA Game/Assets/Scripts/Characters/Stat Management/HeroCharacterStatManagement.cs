@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-public class HeroCharacterStatManagement : BaseCharacterStatManagement, IStatManagement<HeroCharacter, HeroCharacterStatManagement> {
+public class HeroCharacterStatManagement : BaseCharacterStatManagement, IHeroCharacterStatManagement<HeroCharacter, HeroCharacterStatManagement> {
+
+    [SerializeField] HeroCharacter heroStats;
 
     public int currentGold;
 
@@ -15,7 +17,7 @@ public class HeroCharacterStatManagement : BaseCharacterStatManagement, IStatMan
 
     private void Start()
     {
-        LoadStats(characterStats);
+        LoadStats(heroStats);
     }
 
     public void LoadStats(HeroCharacter stats)
@@ -34,9 +36,48 @@ public class HeroCharacterStatManagement : BaseCharacterStatManagement, IStatMan
         Debug.Log(maxHealth);
         Debug.Log(attributeType);
     }
+    public void OnStrengthChange(HeroCharacterStatManagement heroStatManagement, float amount)
+    {
+        heroStatManagement.strength += amount;
+        Debug.Log("Strength increased to " + heroStatManagement.strength);
+        if (heroStatManagement.attributeType == AttributeType.STRENGTH)
+        {
+            heroStatManagement.baseDamage += new Vector2(amount, amount);
+            Debug.Log("Damage increased to " + heroStatManagement.BaseDamage);
+        }
+    }
+
+    public void OnAgilityChange(HeroCharacterStatManagement heroStatManagement, float amount)
+    {
+        heroStatManagement.agility += amount;
+        Debug.Log("Agility increased to " + heroStatManagement.agility);
+        if (heroStatManagement.attributeType == AttributeType.AGILITY)
+        {
+            heroStatManagement.baseDamage += new Vector2(amount, amount);
+            Debug.Log("Damage increased to " + heroStatManagement.BaseDamage);
+        }
+    }
+
+    public void OnIntelligenceChange(HeroCharacterStatManagement heroStatManagement, float amount)
+    {
+        heroStatManagement.intelligence += amount;
+        Debug.Log("Intelligence increased to " + heroStatManagement.intelligence);
+        if (heroStatManagement.attributeType == AttributeType.INTELLIGENCE)
+        {
+            heroStatManagement.baseDamage += new Vector2(amount, amount);
+            Debug.Log("Damage increased to " + heroStatManagement.BaseDamage);
+        }
+    }
 
     public void OnDamageTaken(HeroCharacterStatManagement recievingCharacter, BaseCharacterStatManagement attackingCharacter, CharacterAttackType type, float dmg)
     {
         base.OnDamageTaken(recievingCharacter, attackingCharacter, type, dmg);
     }
+}
+
+public interface IHeroCharacterStatManagement<T,Y> : IBaseCharacterStatManagement<T, Y> {
+
+    void OnStrengthChange(Y statManager, float amount);
+    void OnAgilityChange(Y statManager, float amount);
+    void OnIntelligenceChange(Y statManager, float amount);
 }
