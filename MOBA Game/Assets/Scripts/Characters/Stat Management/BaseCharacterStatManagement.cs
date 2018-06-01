@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BaseCharacterStatManagement : MonoBehaviour {
 
+    float currentHealth;
+    float currentMana;
+
     #region CharacterBaseStats
     [SerializeField] BaseCharacter characterStats;
 
-    protected Vector2 damage;
+    protected Vector2 baseDamage;
     protected float attackSpeed;
     protected float maxHealth, maxMana;
     protected float armor, magicArmor;
@@ -22,24 +25,24 @@ public class BaseCharacterStatManagement : MonoBehaviour {
 
     private void Start()
     {
-        LoadStats();
+        LoadStats(characterStats);
     }
 
-    protected virtual void LoadStats()
+    protected virtual void LoadStats(BaseCharacter stats)
     {
-        damage = characterStats.DamageRange;
-        attackSpeed = characterStats.AttackSpeed;
-        maxHealth = characterStats.Health;
-        maxMana = characterStats.Mana;
-        armor = characterStats.Armor;
-        magicArmor = characterStats.MagicArmor;
-        attackRange = characterStats.AttackRange;
-        movementSpeed = characterStats.MovementSpeed;
-        healthRegeneration = characterStats.HealthRegeneration;
-        manaRegeneration = characterStats.ManaRegeneration;
-        goldGivenUponDeath = characterStats.GoldGivenUponDeath;
-        attackType = characterStats.AttackType;
-        attackRangeType = characterStats.RangeType;
+        baseDamage = stats.BaseDamage;
+        attackSpeed = stats.AttackSpeed;
+        maxHealth = stats.Health;
+        maxMana = stats.Mana;
+        armor = stats.Armor;
+        magicArmor = stats.MagicArmor;
+        attackRange = stats.AttackRange;
+        movementSpeed = stats.MovementSpeed;
+        healthRegeneration = stats.HealthRegeneration;
+        manaRegeneration = stats.ManaRegeneration;
+        goldGivenUponDeath = stats.GoldGivenUponDeath;
+        attackType = stats.AttackType;
+        attackRangeType = stats.RangeType;
     }
 
     public virtual void OnDamageTaken(BaseCharacter attackingCharacter, CharacterAttackType type, float dmg)

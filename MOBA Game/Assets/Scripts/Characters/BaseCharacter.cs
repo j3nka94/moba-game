@@ -8,7 +8,7 @@ public class BaseCharacter : ScriptableObject {
     [SerializeField] protected Texture2D image;
 
     // In game variables
-    [SerializeField] protected Vector2 damageRange;
+    [SerializeField] protected Vector2 baseDamage;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float health, mana;
     [SerializeField] protected float armor, magicArmor;
@@ -22,7 +22,7 @@ public class BaseCharacter : ScriptableObject {
 
     public string CharacterName { get { return characterName; } }
     public string Description { get { return description; } }
-    public Vector2 DamageRange { get { return damageRange; } }
+    public Vector2 BaseDamage { get { return baseDamage; } }
     public float AttackSpeed { get { return attackSpeed; } }
     public float Health { get { return health; } }
     public float Mana { get { return mana; } }
