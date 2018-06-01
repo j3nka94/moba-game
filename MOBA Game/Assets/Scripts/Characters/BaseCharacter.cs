@@ -16,7 +16,7 @@ public class BaseCharacter : ScriptableObject {
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float healthRegeneration;
     [SerializeField] protected float manaRegeneration;
-    [SerializeField] protected float goldGivenUponDeath;
+    [SerializeField] protected int goldGivenUponDeath;
     [SerializeField] protected CharacterAttackType attackType = CharacterAttackType.PHYSICAL;
     [SerializeField] protected CharacterAttackRangeType attackRangeType = CharacterAttackRangeType.MELEE;
 
@@ -32,7 +32,7 @@ public class BaseCharacter : ScriptableObject {
     public float MovementSpeed { get { return movementSpeed; } }
     public float HealthRegeneration { get { return healthRegeneration; } }
     public float ManaRegeneration { get { return manaRegeneration; } }
-    public float GoldGivenUponDeath { get { return goldGivenUponDeath; } }
+    public int GoldGivenUponDeath { get { return goldGivenUponDeath; } }
     public CharacterAttackType AttackType { get { return attackType; } }
     public CharacterAttackRangeType RangeType { get { return attackRangeType; } }
 }

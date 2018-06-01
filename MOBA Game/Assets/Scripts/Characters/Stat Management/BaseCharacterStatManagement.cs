@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BaseCharacterStatManagement : MonoBehaviour {
+public class BaseCharacterStatManagement : MonoBehaviour, IStatManagement<BaseCharacter, BaseCharacterStatManagement> {
 
-    float currentHealth;
-    float currentMana;
+    public float currentHealth;
+    public float currentMana;
 
     #region CharacterBaseStats
-    [SerializeField] BaseCharacter characterStats;
+    [SerializeField] protected BaseCharacter characterStats;
 
     protected Vector2 baseDamage;
     protected float attackSpeed;
@@ -18,9 +16,11 @@ public class BaseCharacterStatManagement : MonoBehaviour {
     protected float movementSpeed;
     protected float healthRegeneration;
     protected float manaRegeneration;
-    protected float goldGivenUponDeath;
+    protected int goldGivenUponDeath;
     protected CharacterAttackType attackType = CharacterAttackType.PHYSICAL;
     protected CharacterAttackRangeType attackRangeType = CharacterAttackRangeType.MELEE;
+
+    public Vector2 BaseDamage { get { return baseDamage; } }
     #endregion
 
     private void Start()
@@ -28,7 +28,7 @@ public class BaseCharacterStatManagement : MonoBehaviour {
         LoadStats(characterStats);
     }
 
-    protected virtual void LoadStats(BaseCharacter stats)
+    public void LoadStats(BaseCharacter stats)
     {
         baseDamage = stats.BaseDamage;
         attackSpeed = stats.AttackSpeed;
@@ -43,9 +43,12 @@ public class BaseCharacterStatManagement : MonoBehaviour {
         goldGivenUponDeath = stats.GoldGivenUponDeath;
         attackType = stats.AttackType;
         attackRangeType = stats.RangeType;
+
+        currentHealth = maxHealth;
+        currentMana = maxMana;
     }
 
-    public virtual void OnDamageTaken(BaseCharacter attackingCharacter, CharacterAttackType type, float dmg)
+    public void OnDamageTaken(BaseCharacterStatManagement recievingCharacter, BaseCharacterStatManagement attackingCharacter, CharacterAttackType type, float dmg)
     {
         // Damage after armor damage reduction.
         float reducedDmg;
@@ -66,5 +69,28 @@ public class BaseCharacterStatManagement : MonoBehaviour {
         {
             reducedDmg = dmg;
         }
+
+        Debug.Log("Damage after armor damage reduction = " + reducedDmg);
+
+        if(recievingCharacter.currentHealth - reducedDmg <= 0)
+        {
+            recievingCharacter.currentHealth = 0;
+            if(attackingCharacter is HeroCharacterStatManagement)
+            {
+                HeroCharacterStatManagement heroCharacterStatManager = (HeroCharacterStatManagement)attackingCharacter;
+                heroCharacterStatManager.currentGold += recievingCharacter.goldGivenUponDeath;
+                Debug.Log(recievingCharacter.characterStats.CharacterName + " died. " + recievingCharacter.goldGivenUponDeath + " gold added to " + attackingCharacter.characterStats.CharacterName);
+            }
+        }
+        else
+        {
+            recievingCharacter.currentHealth -= reducedDmg;
+        }
     }
+}
+
+public interface IStatManagement<T, Y> {
+
+    void LoadStats(T stats);
+    void OnDamageTaken(Y recievingCharacterStatManagement, BaseCharacterStatManagement attackingCharacterStatManagement, CharacterAttackType attackType, float damage);
 }

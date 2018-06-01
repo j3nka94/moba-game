@@ -868,6 +868,8 @@ GameObject:
   - component: {fileID: 2056957694}
   - component: {fileID: 2056957693}
   - component: {fileID: 2056957695}
+  - component: {fileID: 2056957697}
+  - component: {fileID: 2056957696}
   m_Layer: 0
   m_Name: TestObject
   m_TagString: Untagged
@@ -915,5 +917,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698a4409743ae1940b6cf64985fa0214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
-  heroStats: {fileID: 11400000, guid: 732479f7889d65d44adc09121edf3209, type: 2}
+  currentHealth: 0
+  currentMana: 0
+  characterStats: {fileID: 11400000, guid: 732479f7889d65d44adc09121edf3209, type: 2}
+  currentGold: 0
+--- !u!114 &2056957696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2056957692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1dfea93502ac6418b3d4973a5048a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recieving: {fileID: 2056957697}
+  giving: {fileID: 2056957695}
+--- !u!114 &2056957697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2056957692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333d4c1b2f738e3419e915f35dee03b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  currentMana: 0
+  characterStats: {fileID: 11400000, guid: eb979a5c6ba9407439bde18095cdab4f, type: 2}

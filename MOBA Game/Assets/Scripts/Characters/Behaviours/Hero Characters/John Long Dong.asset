@@ -14,7 +14,7 @@ MonoBehaviour:
   characterName: John Long Dong
   description: This is a Hero
   image: {fileID: 0}
-  baseDamage: {x: 0, y: 0}
+  baseDamage: {x: 38, y: 42}
   attackSpeed: 0.72
   health: 473
   mana: 221
@@ -24,7 +24,7 @@ MonoBehaviour:
   movementSpeed: 300
   healthRegeneration: 0
   manaRegeneration: 0
-  goldGivenUponDeath: 300
+  goldGivenUponDeath: 0
   attackType: 0
   attackRangeType: 1
   attributeType: 1

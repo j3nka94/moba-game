@@ -14,7 +14,7 @@ MonoBehaviour:
   characterName: Legion Melee Creep
   description: It's a creep!
   image: {fileID: 0}
-  baseDamageRange: {x: 32, y: 34}
+  baseDamage: {x: 0, y: 0}
   attackSpeed: 0
   health: 350
   mana: 0
@@ -22,8 +22,8 @@ MonoBehaviour:
   magicArmor: 1
   attackRange: 100
   movementSpeed: 420
-  baseHealthRegeneration: 0
-  baseManaRegeneration: 0
-  goldGivenUponDeath: 0
+  healthRegeneration: 0
+  manaRegeneration: 0
+  goldGivenUponDeath: 35
   attackType: 0
   attackRangeType: 0
